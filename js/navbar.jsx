@@ -10,9 +10,11 @@ import {
 export default class Navbar extends React.Component{
     render(){
         return(
-            <div>
-                <h1>filmoteka</h1>
-                <ul>
+            <div className="navbar">
+                <Link to="/">
+                <img src="../images/logo.png" alt=""/>
+                </Link>
+                <ul className="navbar">
                     <li>
                         <NavLink exact to="/" activeClassName="activeLink">Home</NavLink>
                     </li>

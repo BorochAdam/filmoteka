@@ -11,8 +11,9 @@ export default class NotFound extends React.Component{
     render(){
         return(
             <div>
-                Error 404 - Page not found.
-                <br/>
+                <h2>
+                    Error 404 - Page not found.
+                </h2>
                 <Link to="/">Main page</Link>
             </div>
         )
