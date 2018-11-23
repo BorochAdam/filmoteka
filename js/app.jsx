@@ -5,7 +5,6 @@ import Main from './main.jsx';
 import AboutMe from './about.jsx';
 import NotFound from './notfound.jsx';
 import Navbar from './navbar.jsx';
-
 import {
     HashRouter,
     Route,
@@ -13,6 +12,9 @@ import {
     Switch,
     NavLink,
 } from 'react-router-dom';
+
+
+
 
 class App extends React.Component{
     render(){

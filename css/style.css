@@ -4,6 +4,10 @@ body{
     padding: 20px;
 }
 
+.movies span{
+    padding: 2px;
+}
+
 body a{
     text-decoration: none;
     color: #fff;

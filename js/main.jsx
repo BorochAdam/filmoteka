@@ -1,24 +1,45 @@
 import React from 'react';
-const movies = [{"name":"Kick-Ass","year":"2010","duration":118,"genre":"Action, Comedy","rating":7.7,"votes":416838},{"name":"Kick-Ass 2","year":"2013","duration":103,"genre":"Action, Comedy, Crime","rating":6.6,"votes":191937},{"name":"Kiler","year":"1997","duration":104,"genre":"Action, Comedy, Crime","rating":7.6,"votes":2906},{"name":"Kill Bill vol.1","year":"2003","duration":111,"genre":"Action","rating":8.1,"votes":692205},{"name":"Kill Bill vol.2","year":"2004","duration":137,"genre":"Action, Crime, Thriller","rating":8,"votes":491040},{"name":"King Kong","year":"2005","duration":200,"genre":"Action, Adventure, Drama","rating":7.3,"votes":305349},{"name":"Kingsajz","year":"1987","duration":105},{"name":"Kingsman The Secret Service","year":"2014","duration":128,"genre":"Action, Adventure, Comedy","rating":7.8,"votes":348769},{"name":"Knight and Day 2","year":"2010","duration":110},{"name":"Knight and Day extended","year":"2010","duration":117},{"name":"Knight and Day PL 2","year":"2010","duration":103},{"name":"Knight and Day PL","year":"2010","duration":103},{"name":"Knight and Day","year":"2010","duration":110,"genre":"Action, Comedy, Romance","rating":6.3,"votes":143558},{"name":"Knight Rider 2000","year":"1991","duration":95,"genre":"Action, Adventure, Sci-Fi","rating":4.6,"votes":1891},{"name":"Knight Rider 2010","year":"1994","duration":87,"genre":"Sci-Fi","rating":3.1,"votes":668}];
 
-export default class Main extends React.Component{
-    constructor(props){
+
+const movies = [
+    {"name":"Knight and Day","year":"2010","duration":110,"genre":"Action, Comedy, Romance","rating":6.3,"votes":143558},
+    {"name":"Knight Rider 2000","year":"1991","duration":95,"genre":"Action, Adventure, Sci-Fi","rating":4.6,"votes":1891},
+    {"name":"Knight Rider 2012","year":"1994","duration":87,"genre":"Sci-Fi","rating":3.1,"votes":668},
+    {"name":"American Pie 3 The Wedding","year":"2003","duration":99},{"name":"American Pie 4 Band Camp","year":"2005","duration":91},{"name":"American Pie 5 The Naked Mile","year":"2006","duration":98},{"name":"American Pie 6 Beta House","year":"2007","duration":87},{"name":"American Pie 7 Presents The Book of Love","year":"2009","duration":94},{"name":"American Pie 8 Hole In One","year":"2010","duration":96},{"name":"Angels and Demons","year":"2009","duration":146,"genre":"N/A","rating":4.3,"votes":38},{"name":"The Angriest Man in Brooklyn","year":"2014","duration":84,"genre":"Comedy, Drama","rating":5.7,"votes":15384},{"name":"Hostage","year":"2005","duration":113,"genre":"Action, Crime, Drama","rating":6.6,"votes":91927},{"name":"Hot Pursuit","year":"2015","duration":88,"genre":"Action, Comedy, Crime","rating":5.1,"votes":29095},{"name":"Hot Shots","year":"1991","duration":85,"genre":"Action, Comedy","rating":6.7,"votes":75776},{"name":"Hot Shots Part Deux","year":"1993","duration":85,"genre":"Documentary, Short, Comedy","rating":7.8,"votes":39},{"name":"Hot Tub Time Machine","year":"2010","duration":101,"genre":"Comedy, Sci-Fi","rating":6.4,"votes":135874},{"name":"Hot Tub Time Machine 2","year":"2015","duration":99,"genre":"Comedy, Sci-Fi","rating":5.1,"votes":24523},{"name":"Hotel Transylvania","year":"2012","duration":92,"genre":"Animation, Comedy, Family","rating":7.1,"votes":153013},{"name":"Hotel Transylvania 2","year":"2015","duration":89,"genre":"Animation, Comedy, Family","rating":6.8,"votes":36653},{"name":"How To Train Your Dragon","year":"2010","duration":98,"genre":"Animation, Action, Adventure","rating":8.2,"votes":457234},{"name":"How To Train Your Dragon 2","year":"2014","duration":102,"genre":"Animation, Action, Adventure","rating":7.9,"votes":204443},{"name":"Howard the Duck","year":"1986","duration":110,"genre":"Action, Adventure, Comedy","rating":4.5,"votes":32501},{"name":"Howl's Moving Castle","year":"2004","duration":119,"genre":"Animation, Adventure, Family","rating":8.2,"votes":200366},{"name":"Hudson Hawk","year":"1991","duration":100,"genre":"Action, Adventure, Comedy","rating":5.7,"votes":42166},{"name":"Hugo","year":"2011","duration":126,"genre":"Adventure, Drama, Family","rating":7.6,"votes":236290},{"name":"Hulk","year":"2003","duration":138,"genre":"Action, Sci-Fi","rating":5.7,"votes":204253},{"name":"The Incredible Hulk","year":"2008","duration":112,"genre":"Action, Adventure, Sci-Fi","rating":6.8,"votes":311259},{"name":"Planet Hulk","year":"2010","duration":81,"genre":"Animation, Action, Adventure","rating":6.9,"votes":8181},{"name":"The Hunger Games","year":"2012","duration":143,"genre":"Adventure, Drama, Sci-Fi","rating":7.3,"votes":675743},{"name":"The Hunger Games Catching Fire","year":"2013","duration":146,"genre":"Adventure, Sci-Fi, Thriller","rating":7.6,"votes":475539},{"name":"The Hunger Games Mockingjay 01","year":"2014","duration":123}
+];
+
+export default class Main extends React.Component {
+    constructor(props) {
         super(props);
-        this.state={
-
+        this.state = {
+            moviesLi: []
         };
     }
-    render(){
-        movies.forEach((element)=>{
-            console.log(element.name);
-            console.log(element.year);
+    render() {
+        const moviesLi = [];
+            movies.forEach((element, index) => {
+                let movieLink="https://www.youtube.com/results?search_query=";
+                movieLink=movieLink+element.name+"+"+element.year+"+trailer";
+            moviesLi.push(
+                <li className="movies" key={index}>
+                    {element.name !== undefined && <h3>{element.name}</h3>}
+                    <span>rok wydania : {element.year},</span>
+                    {element.duration !== undefined && <span>długość (m.) :{element.duration},</span>}
+                    {element.genre !== undefined && element.genre !== 'N/A' && <span>gatunek : {element.genre}</span>}
+                    {element.rating!== undefined && <span>ocena: {element.rating}</span>}
+                    {element.votes !== undefined && <span>ilość głosów: {element.votes}</span>}
+                    <span><a target="_blank" href={movieLink}>trailer w Youtube</a></span>
+                </li>
+            )
         });
-        return(
+        return (
             <div>
                 <h2>
                     Znajdź, co ciekawego możesz obejrzeć dziś wieczorem!
                 </h2>
-
+                <ul>
+                    {moviesLi}
+                </ul>
             </div>
         );
     }
