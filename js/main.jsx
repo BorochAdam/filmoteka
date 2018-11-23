@@ -23,12 +23,25 @@ export default class Main extends React.Component {
         });
     };
 
+    sortByName = (a,b) =>{
+        return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);
+    };
+
+    sortByYear = (a,b) =>{
+        return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);
+    };
+
     handleClick = (event) => {
         event.preventDefault();
-       console.log(movies);
+       console.log(this.state.whatToSort);
        let newArray = [...movies];
        console.log(newArray);
-        newArray.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} );
+        if (this.state.whatToSort==="name"){
+            newArray.sort(this.sortByName);
+        }
+        else if (this.state.whatToSort==="year"){
+            newArray.sort(this.sortByYear);
+        }
 
     };
 
