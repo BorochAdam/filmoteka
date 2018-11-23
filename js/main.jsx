@@ -12,12 +12,29 @@ export default class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            moviesLi: []
+            whatToSort : "name",
+            movies : movies,
         };
     }
+
+    handleTitleChange = (event) =>{
+        this.setState({
+            [event.target.id] : event.target.value
+        });
+    };
+
+    handleClick = (event) => {
+        event.preventDefault();
+       console.log(movies);
+       let newArray = [...movies];
+       console.log(newArray);
+        newArray.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} );
+
+    };
+
     render() {
         const moviesLi = [];
-            movies.forEach((element, index) => {
+            this.state.movies.forEach((element, index) => {
                 let movieLink="https://www.youtube.com/results?search_query=";
                 movieLink=movieLink+element.name+"+"+element.year+"+trailer";
             moviesLi.push(
@@ -37,6 +54,18 @@ export default class Main extends React.Component {
                 <h2>
                     Znajdź, co ciekawego możesz obejrzeć dziś wieczorem!
                 </h2>
+                <span>
+                    <span>Sortuj według:</span>
+                    <select id={"whatToSort"}
+                        onChange={this.handleTitleChange}>
+                        <option value="name">tytuł</option>
+                        <option value="year">rok wydania</option>
+                        <option value="duration">długość</option>
+                        <option value="rating">ocena</option>
+                        <option value="votes">ilość głosów</option>
+                    </select>
+                    <button onClick={this.handleClick}>Sortuj</button>
+                </span>
                 <ul>
                     {moviesLi}
                 </ul>
