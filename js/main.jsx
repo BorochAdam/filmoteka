@@ -14,6 +14,7 @@ export default class Main extends React.Component {
         this.state = {
             whatToSort : "name",
             movies : movies,
+            typeOfSort : "asc"
         };
     }
 
@@ -50,6 +51,7 @@ export default class Main extends React.Component {
     handleClick = (event) => {
         event.preventDefault();
        console.log(this.state.whatToSort);
+       console.log(this.state.typeOfSort);
        let newArray = [...movies];
        console.log(newArray);
         if (this.state.whatToSort==="name"){
@@ -101,6 +103,12 @@ export default class Main extends React.Component {
                         <option value="duration">długość</option>
                         <option value="rating">ocena</option>
                         <option value="votes">ilość głosów</option>
+                    </select>
+                    <select id={"typeOfSort"}
+                            onChange={this.handleTitleChange}
+                    >
+                        <option value="asc">rosnąco</option>
+                        <option value="desc">malejąco</option>
                     </select>
                     <button onClick={this.handleClick}>Sortuj</button>
                 </span>
