@@ -31,6 +31,22 @@ export default class Main extends React.Component {
         return (a.year > b.year) ? 1 : ((b.year > a.year) ? -1 : 0);
     };
 
+    sortByDuration = (a,b) =>{
+        return (a.duration > b.duration) ? 1 : ((b.duration > a.duration) ? -1 : 0);
+    };
+
+    sortByRating = (a,b) =>{
+        if (a.rating === undefined) a.rating=0;
+        if (b.rating === undefined) b.rating=0;
+        return (a.rating > b.rating) ? 1 : ((b.rating > a.rating) ? -1 : 0);
+    };
+
+    sortByVotes = (a,b) =>{
+        if (a.votes === undefined) a.votes=0;
+        if (b.votes === undefined) b.votes=0;
+        return (a.votes > b.votes) ? 1 : ((b.votes > a.votes) ? -1 : 0);
+    };
+
     handleClick = (event) => {
         event.preventDefault();
        console.log(this.state.whatToSort);
@@ -41,6 +57,15 @@ export default class Main extends React.Component {
         }
         else if (this.state.whatToSort==="year"){
             newArray.sort(this.sortByYear);
+        }
+        else if (this.state.whatToSort==="duration"){
+            newArray.sort(this.sortByDuration);
+        }
+        else if (this.state.whatToSort==="rating"){
+            newArray.sort(this.sortByRating);
+        }
+        else if (this.state.whatToSort==="votes"){
+            newArray.sort(this.sortByVotes);
         }
 
     };
