@@ -69,7 +69,9 @@ export default class Main extends React.Component {
         else if (this.state.whatToSort==="votes"){
             newArray.sort(this.sortByVotes);
         }
-
+        if (this.state.typeOfSort==="desc"){
+            newArray.reverse();
+        }
     };
 
     render() {
