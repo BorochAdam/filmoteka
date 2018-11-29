@@ -59,7 +59,19 @@ export default class Main extends React.Component {
 
     handleSearchClick = (event) =>{
         event.preventDefault();
-        console.log(this.state.phraseToSearch)
+        console.log(this.state.phraseToSearch);
+        let arrayFilteredItems = [];
+        for (let i of this.state.moviesToShow){
+            //jeśli znajdzie w tekście i.name frazę state.phraseToSearch to ma ją wrzucić do state wyświetlanych filmów, oba są toUpperCase przyrównane, żeby wyeliminować rożnice mała-wielka litera.
+            if (i.name.toUpperCase().indexOf(this.state.phraseToSearch.toUpperCase()) >= 0){
+                //do nowej tablicy wrzucam elementy i, które pasują do warunku wyszukiwania
+                arrayFilteredItems.push(i);
+            }
+        }
+        //tablicę z elementami i z wyszukania podmieniam w state jako elementy do wyświetlenia
+       this.setState({
+           moviesToShow : arrayFilteredItems
+       })
     };
 
     handleClick = (event) => {
