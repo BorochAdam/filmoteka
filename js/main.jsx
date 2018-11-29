@@ -113,6 +113,10 @@ export default class Main extends React.Component {
                         <option value="desc">malejąco</option>
                     </select>
                     <button onClick={this.handleClick}>Sortuj</button>
+                    <input type="text"/>
+                    <button>
+                        Szukaj
+                    </button>
                 </span>
                 <ul>
                     {moviesLi}
