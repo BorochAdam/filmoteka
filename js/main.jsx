@@ -76,7 +76,7 @@ export default class Main extends React.Component {
 
     handleClick = (event) => {
         event.preventDefault();
-       let newArray = [...movies];
+       let newArray = [...this.state.moviesToShow];
         if (this.state.whatToSort==="name"){
             newArray.sort(this.sortByName);
         }
