@@ -17,7 +17,9 @@ export default class Main extends React.Component {
             moviesToShow : movies,
             moviesSorted : movies,
             typeOfSort : "asc",
-            phraseToSearch: ""
+            phraseToSearch: "",
+            //stan dla wyświetlania p z informacją o typie sortowania
+            showWindowSort : false
         };
     }
 
@@ -54,13 +56,13 @@ export default class Main extends React.Component {
     handleResetButton = (event) =>{
         event.preventDefault();
         this.setState({
-            moviesToShow : this.state.movies
+            moviesToShow : this.state.movies,
+            showWindowSort : false
         });
     };
 
     handleSearchClick = (event) =>{
         event.preventDefault();
-        console.log(this.state.phraseToSearch);
         let arrayFilteredItems = [];
         for (let i of this.state.moviesSorted){
             //jeśli znajdzie w tekście i.name frazę state.phraseToSearch to ma ją wrzucić do state wyświetlanych filmów, oba są toUpperCase przyrównane, żeby wyeliminować rożnice mała-wielka litera.
@@ -73,6 +75,45 @@ export default class Main extends React.Component {
        this.setState({
            moviesToShow : arrayFilteredItems
        })
+    };
+
+    sortTypeText = (a, b) => {
+        let typeOfSort;
+        let ascDesc;
+        //określenie czy asc-rosnąco czy desc-malejąco
+        switch (b) {
+            case "asc":
+                ascDesc = "rosnąco";
+                break;
+            case "desc":
+                ascDesc = "malejąco";
+                break;
+            default:
+                ascDesc = "błąd!";
+        }
+        switch (a) {
+            case "name":
+                typeOfSort = "po nazwie filmu";
+                break;
+            case "year":
+                typeOfSort = "po roku nakręcenia";
+                break;
+            case "duration":
+                typeOfSort = "po długości filmu";
+                break;
+            case "rating":
+                typeOfSort = "po ocenie widzów";
+                break;
+            case "votes":
+                typeOfSort = "po ilości głosów";
+                break;
+            case "genre":
+                typeOfSort = "po rodzaju filmu";
+                break;
+            default:
+                typeOfSort = "błąd!";
+        }
+        return ("Obecne sortowanie to: "+typeOfSort +" "+ ascDesc+".");
     };
 
     handleClick = (event) => {
@@ -105,7 +146,8 @@ export default class Main extends React.Component {
         }
         this.setState({
             moviesToShow : newArray,
-            moviesSorted : allMoviesArray
+            moviesSorted : allMoviesArray,
+            showWindowSort : true
         })
     };
 
@@ -156,6 +198,10 @@ export default class Main extends React.Component {
                     <button onClick={this.handleSearchClick}>
                         Szukaj
                     </button>
+                    <p>
+                        {this.state.showWindowSort===true &&  this.sortTypeText(this.state.whatToSort,this.state.typeOfSort)}
+
+                    </p>
                 </span>
                 <ul>
                     {moviesLi}
