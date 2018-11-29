@@ -14,7 +14,9 @@ export default class Main extends React.Component {
         this.state = {
             whatToSort : "name",
             movies : movies,
-            typeOfSort : "asc"
+            moviesToShow : movies,
+            typeOfSort : "asc",
+            phraseToSearch: ""
         };
     }
 
@@ -48,12 +50,21 @@ export default class Main extends React.Component {
         return (a.votes > b.votes) ? 1 : ((b.votes > a.votes) ? -1 : 0);
     };
 
+    handleResetButton = (event) =>{
+        event.preventDefault();
+        this.setState({
+            moviesToShow : this.state.movies
+        });
+    };
+
+    handleSearchClick = (event) =>{
+        event.preventDefault();
+        console.log(this.state.phraseToSearch)
+    };
+
     handleClick = (event) => {
         event.preventDefault();
-       console.log(this.state.whatToSort);
-       console.log(this.state.typeOfSort);
        let newArray = [...movies];
-       console.log(newArray);
         if (this.state.whatToSort==="name"){
             newArray.sort(this.sortByName);
         }
@@ -72,11 +83,14 @@ export default class Main extends React.Component {
         if (this.state.typeOfSort==="desc"){
             newArray.reverse();
         }
+        this.setState({
+            moviesToShow : newArray
+        })
     };
 
     render() {
         const moviesLi = [];
-            this.state.movies.forEach((element, index) => {
+            this.state.moviesToShow.forEach((element, index) => {
                 let movieLink="https://www.youtube.com/results?search_query=";
                 movieLink=movieLink+element.name+"+"+element.year+"+trailer";
             moviesLi.push(
@@ -113,8 +127,12 @@ export default class Main extends React.Component {
                         <option value="desc">malejąco</option>
                     </select>
                     <button onClick={this.handleClick}>Sortuj</button>
-                    <input type="text"/>
-                    <button>
+                    <button onClick={this.handleResetButton}>Czyszczenie sortowania</button>
+                    <input type="text"
+                           id={"phraseToSearch"}
+                           onChange={this.handleTitleChange}
+                    />
+                    <button onClick={this.handleSearchClick}>
                         Szukaj
                     </button>
                 </span>
