@@ -19,7 +19,9 @@ export default class Main extends React.Component {
             typeOfSort : "asc",
             phraseToSearch: "",
             //stan dla wyświetlania p z informacją o typie sortowania
-            showWindowSort : false
+            showWindowSort : false,
+        //    stan do wyświetlania p z informacją jaką frazę obecnie wyszukuję. Po kliknięciu przycisku, fraza z this.state.phraseToSearch przeskakuje tutaj i zostaje wyświetlona, jak nie jst pusta
+            showWindowSearch: "",
         };
     }
 
@@ -73,7 +75,8 @@ export default class Main extends React.Component {
         }
         //tablicę z elementami i z wyszukania podmieniam w state jako elementy do wyświetlenia
        this.setState({
-           moviesToShow : arrayFilteredItems
+           moviesToShow : arrayFilteredItems,
+           showWindowSearch : this.state.phraseToSearch,
        })
     };
 
@@ -201,6 +204,9 @@ export default class Main extends React.Component {
                     <p>
                         {this.state.showWindowSort===true &&  this.sortTypeText(this.state.whatToSort,this.state.typeOfSort)}
 
+                    </p>
+                    <p>
+                        {this.state.showWindowSearch!=="" && "Obecnie wyszukiwana fraza: "+this.state.showWindowSearch}
                     </p>
                 </span>
                 <ul>
