@@ -15,6 +15,7 @@ export default class Main extends React.Component {
             whatToSort : "name",
             movies : movies,
             moviesToShow : movies,
+            moviesSorted : movies,
             typeOfSort : "asc",
             phraseToSearch: ""
         };
@@ -61,7 +62,7 @@ export default class Main extends React.Component {
         event.preventDefault();
         console.log(this.state.phraseToSearch);
         let arrayFilteredItems = [];
-        for (let i of this.state.moviesToShow){
+        for (let i of this.state.moviesSorted){
             //jeśli znajdzie w tekście i.name frazę state.phraseToSearch to ma ją wrzucić do state wyświetlanych filmów, oba są toUpperCase przyrównane, żeby wyeliminować rożnice mała-wielka litera.
             if (i.name.toUpperCase().indexOf(this.state.phraseToSearch.toUpperCase()) >= 0){
                 //do nowej tablicy wrzucam elementy i, które pasują do warunku wyszukiwania
@@ -76,27 +77,35 @@ export default class Main extends React.Component {
 
     handleClick = (event) => {
         event.preventDefault();
+        let allMoviesArray = [...this.state.movies];
        let newArray = [...this.state.moviesToShow];
         if (this.state.whatToSort==="name"){
             newArray.sort(this.sortByName);
+            allMoviesArray.sort(this.sortByName);
         }
         else if (this.state.whatToSort==="year"){
             newArray.sort(this.sortByYear);
+            allMoviesArray.sort(this.sortByYear);
         }
         else if (this.state.whatToSort==="duration"){
             newArray.sort(this.sortByDuration);
+            allMoviesArray.sort(this.sortByDuration);
         }
         else if (this.state.whatToSort==="rating"){
             newArray.sort(this.sortByRating);
+            allMoviesArray.sort(this.sortByRating);
         }
         else if (this.state.whatToSort==="votes"){
             newArray.sort(this.sortByVotes);
+            allMoviesArray.sort(this.sortByVotes);
         }
         if (this.state.typeOfSort==="desc"){
             newArray.reverse();
+            allMoviesArray.reverse();
         }
         this.setState({
-            moviesToShow : newArray
+            moviesToShow : newArray,
+            moviesSorted : allMoviesArray
         })
     };
 
